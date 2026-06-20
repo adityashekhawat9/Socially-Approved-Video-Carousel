@@ -58,7 +58,7 @@ function App() {
       {/* Header */}
       <header className="App-header">
         <div className="header-content">
-          <h1>DripTrip Social Picks</h1>
+          <h1>Socially Approved</h1>
           <p>Short clips, quick reactions, and customer-style proof</p>
           {!isConnected && (
             <div className="connection-warning">
