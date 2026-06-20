@@ -219,9 +219,10 @@ const InnerSlider = memo(({
                       {isLoaded && <p>{video.description}</p>}
                       <span>{video.creator}</span>
                     </div>
+                  </div>
 
-                    {isLoaded && (
-                      <div className="inner-video-actions">
+                  {isLoaded && isActive && (
+                    <div className="inner-video-actions">
                       <LikeButton
                         videoId={video._id}
                         initialLikes={video.likes || 0}
@@ -232,9 +233,8 @@ const InnerSlider = memo(({
                         videoTitle={video.title}
                         onShareSuccess={(_, shareCount) => handleShareSuccess(video._id, shareCount)}
                       />
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </article>
               </div>
               );
