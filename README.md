@@ -4,7 +4,7 @@ A MERN stack video carousel inspired by the "Socially Approved" section on dript
 
 ## Features
 
-- Dashboard grid with 40+ backend-driven videos.
+- Storefront-style horizontal "Socially Approved" carousel with 40+ backend-driven videos.
 - Click any card to open the inner video carousel modal.
 - Inner carousel supports horizontal scroll, arrow buttons, keyboard arrows, swipe, and dots.
 - Only nearby videos mount active players; far-away videos stay as lightweight placeholders.
@@ -199,6 +199,7 @@ GET /api/health
 
 ## Performance Notes
 
+- Outer carousel uses horizontal snap scrolling and compact reel-style cards.
 - Dashboard cards use lazy image loading and async image decoding.
 - Inner carousel keeps the scrollable list available but only mounts real video players near the active item.
 - Far-away modal items render as lightweight thumbnail placeholders.

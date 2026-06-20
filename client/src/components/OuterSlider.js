@@ -1,4 +1,5 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useRef, useState, useCallback, memo } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import VideoCard from './VideoCard';
 import InnerSlider from './InnerSlider';
 import '../styles/components/OuterSlider.css';
@@ -9,6 +10,7 @@ import '../styles/components/OuterSlider.css';
  * Optimized with React.memo for efficient rendering
  */
 const OuterSlider = memo(({ videos = [], isLoading = false, onVideoUpdate = () => {} }) => {
+  const railRef = useRef(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,10 +24,23 @@ const OuterSlider = memo(({ videos = [], isLoading = false, onVideoUpdate = () =
     setTimeout(() => setSelectedVideo(null), 300); // Wait for animation
   }, []);
 
+  const scrollRail = useCallback((direction) => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    const card = rail.querySelector('.video-card');
+    const cardWidth = card ? card.getBoundingClientRect().width + 18 : 260;
+
+    rail.scrollBy({
+      left: direction * cardWidth * 3,
+      behavior: 'smooth',
+    });
+  }, []);
+
   if (isLoading) {
     return (
       <div className="outer-slider-container">
-        <div className="outer-slider-grid">
+        <div className="outer-slider-rail loading">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="video-card skeleton-card">
               <div className="skeleton-thumbnail"></div>
@@ -57,11 +72,30 @@ const OuterSlider = memo(({ videos = [], isLoading = false, onVideoUpdate = () =
     <>
       <div className="outer-slider-container">
         <div className="outer-slider-header">
-          <h2>Socially Approved Videos</h2>
-          <p className="video-count">{videos.length} videos</p>
+          <p className="outer-slider-eyebrow">Loved by the community</p>
+          <h2>Socially Approved</h2>
+          <p className="video-count">Watch real short clips from happy customers</p>
+          <div className="outer-slider-actions">
+            <button
+              className="outer-slider-nav"
+              type="button"
+              onClick={() => scrollRail(-1)}
+              title="Scroll left"
+            >
+              <FiChevronLeft size={20} />
+            </button>
+            <button
+              className="outer-slider-nav"
+              type="button"
+              onClick={() => scrollRail(1)}
+              title="Scroll right"
+            >
+              <FiChevronRight size={20} />
+            </button>
+          </div>
         </div>
 
-        <div className="outer-slider-grid">
+        <div className="outer-slider-rail" ref={railRef}>
           {videos.map((video) => (
             <VideoCard
               key={video._id}

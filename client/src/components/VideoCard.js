@@ -61,6 +61,8 @@ const VideoCard = memo(({ video, onVideoClick, isLoading = false }) => {
           </button>
         </div>
 
+        <span className="social-badge">Approved</span>
+
         {video.duration && (
           <span className="video-duration">{formatDuration(video.duration)}</span>
         )}
@@ -68,11 +70,6 @@ const VideoCard = memo(({ video, onVideoClick, isLoading = false }) => {
 
       <div className="video-card-content">
         <h3 className="video-card-title">{video.title}</h3>
-
-        <p className="video-card-description">
-          {(video.description || '').substring(0, 80)}
-          {(video.description || '').length > 80 ? '...' : ''}
-        </p>
 
         <div className="video-card-creator">
           <span className="creator-name">{video.creator}</span>

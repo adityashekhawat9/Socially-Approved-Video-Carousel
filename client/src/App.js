@@ -58,8 +58,8 @@ function App() {
       {/* Header */}
       <header className="App-header">
         <div className="header-content">
-          <h1>🎬 Socially Approved Carousel</h1>
-          <p>Discover amazing videos with real-time engagement</p>
+          <h1>DripTrip Social Picks</h1>
+          <p>Short clips, quick reactions, and customer-style proof</p>
           {!isConnected && (
             <div className="connection-warning">
               ⚠️ API connection unavailable. Some features may not work.
